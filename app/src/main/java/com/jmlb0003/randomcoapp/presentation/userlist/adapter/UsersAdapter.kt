@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import com.jmlb0003.randomcoapp.R
 import com.jmlb0003.randomcoapp.domain.User
 
-class UsersAdapter(private val usersToShow: List<User>,
-                   private val listener: OnUserClickListener) :
+class UsersAdapter(private val listener: OnUserClickListener) :
     RecyclerView.Adapter<UserViewHolder>() {
+
+    private val usersToShow: MutableList<User> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         UserViewHolder(LayoutInflater.from(parent.context)
@@ -19,6 +20,12 @@ class UsersAdapter(private val usersToShow: List<User>,
     }
 
     override fun getItemCount() = usersToShow.size
+
+    fun showUsers(users: List<User>) {
+        usersToShow.clear()
+        usersToShow.addAll(users)
+        notifyDataSetChanged()
+    }
 
     interface OnUserClickListener {
         fun onUserClicked(user: User)

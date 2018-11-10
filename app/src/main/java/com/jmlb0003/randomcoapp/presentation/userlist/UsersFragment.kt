@@ -8,6 +8,7 @@ import com.jmlb0003.randomcoapp.app.di.PresenterFactory
 import com.jmlb0003.randomcoapp.domain.User
 import com.jmlb0003.randomcoapp.presentation.BaseFragment
 import com.jmlb0003.randomcoapp.presentation.userlist.adapter.UsersAdapter
+import kotlinx.android.synthetic.main.fragment_users_list.user_list_view
 
 class UsersFragment : BaseFragment<UsersFragment.Callback, UsersPresenter.UsersView, UsersPresenter>(),
                       UsersPresenter.UsersView,
@@ -25,20 +26,17 @@ class UsersFragment : BaseFragment<UsersFragment.Callback, UsersPresenter.UsersV
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView(view as RecyclerView)
+        presenterInstance.onViewInitialized()
     }
 
     private fun initRecyclerView(view: RecyclerView) {
         with(view) {
-            adapter = UsersAdapter(mutableListOf(User("pepe", "asdasdas"),
-                    User("pepe", "asdasdas"),
-                    User("pepe", "asdasdas"),
-                    User("pepe", "asdasdas"),
-                    User("pepe", "asdasdas"),
-                    User("pepe", "asdasdas"),
-                    User("pepe", "asdasdas"),
-                    User("pepe", "asdasdas")),
-                    this@UsersFragment)
+            adapter = UsersAdapter(this@UsersFragment)
         }
+    }
+
+    override fun showUsers(users: List<User>) {
+        (user_list_view.adapter as UsersAdapter).showUsers(users)
     }
 
     override fun onUserClicked(user: User) {

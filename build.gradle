@@ -44,7 +44,9 @@ ext {
     dagger2Version = '2.14.1'
 
     // Testing
-    mockitoVersion = '2.16.0'
+    mockitoVersion = '2.23.0'
+    mockitoInlineVersion = '2.23.0'
+    mockitoKotlinVersion = '2.0.0'
     junitVersion = '4.12'
     testRunnerVersion = '1.0.2'
     espressoVersion = '3.0.2'
