@@ -1,4 +1,4 @@
-package jmlb0003.com.randomcoapp
+package com.jmlb0003.randomcoapp
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("jmlb0003.com.randomcoapp", appContext.packageName)
+        assertEquals("com.jmlb0003.randomcoapp", appContext.packageName)
     }
 }
