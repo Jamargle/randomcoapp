@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.jmlb0003.randomcoapp.R
+import com.jmlb0003.randomcoapp.app.di.PresenterFactory
 import com.jmlb0003.randomcoapp.domain.User
 import com.jmlb0003.randomcoapp.presentation.BaseFragment
 import com.jmlb0003.randomcoapp.presentation.userlist.adapter.UsersAdapter
@@ -12,7 +13,7 @@ class UsersFragment : BaseFragment<UsersFragment.Callback, UsersPresenter.UsersV
                       UsersPresenter.UsersView,
                       UsersAdapter.OnUserClickListener {
 
-    private val presenterInstance: UsersPresenter by lazy { UsersPresenter() }
+    private val presenterInstance: UsersPresenter by lazy { PresenterFactory.createUsersFragmentPresenter() }
 
     override val layoutResourceId: Int
         get() = R.layout.fragment_users_list
