@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="jmlb0003.com.randomcoapp">
+          package="com.jmlb0003.randomcoapp">
 
     <application
             android:allowBackup="true"

@@ -1,4 +1,4 @@
-package jmlb0003.com.randomcoapp
+package com.jmlb0003.randomcoapp
 
 import org.junit.Test
 

@@ -1,9 +1,9 @@
-package jmlb0003.com.randomcoapp.presentation.userlist
+package com.jmlb0003.randomcoapp.presentation.userlist
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import jmlb0003.com.randomcoapp.R
-import jmlb0003.com.randomcoapp.domain.User
+import com.jmlb0003.randomcoapp.R
+import com.jmlb0003.randomcoapp.domain.User
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
