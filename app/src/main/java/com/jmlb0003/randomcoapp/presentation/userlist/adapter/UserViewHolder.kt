@@ -2,7 +2,7 @@ package com.jmlb0003.randomcoapp.presentation.userlist.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.jmlb0003.randomcoapp.domain.User
+import com.jmlb0003.randomcoapp.domain.model.User
 import kotlinx.android.synthetic.main.item_list_user.view.user_name
 import kotlinx.android.synthetic.main.item_list_user.view.user_surname
 

@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.jmlb0003.randomcoapp.R
-import com.jmlb0003.randomcoapp.domain.User
+import com.jmlb0003.randomcoapp.domain.model.User
 
 class UsersAdapter(private val listener: OnUserClickListener) :
     RecyclerView.Adapter<UserViewHolder>() {

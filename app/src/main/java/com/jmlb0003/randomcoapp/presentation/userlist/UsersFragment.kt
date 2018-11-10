@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.jmlb0003.randomcoapp.R
 import com.jmlb0003.randomcoapp.app.di.PresenterFactory
-import com.jmlb0003.randomcoapp.domain.User
+import com.jmlb0003.randomcoapp.domain.model.User
 import com.jmlb0003.randomcoapp.presentation.BaseFragment
 import com.jmlb0003.randomcoapp.presentation.userlist.adapter.UsersAdapter
 import kotlinx.android.synthetic.main.fragment_users_list.user_list_view
