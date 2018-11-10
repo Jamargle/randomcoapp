@@ -15,7 +15,7 @@ abstract class BaseFragment<C, V : BasePresenter.BaseView, P : BasePresenter<V>>
     @get:LayoutRes
     protected abstract val layoutResourceId: Int
 
-    protected abstract val presenter: P
+    protected abstract fun getPresenter(): P
 
     protected abstract fun getMVPViewReference(): V
 
@@ -41,7 +41,7 @@ abstract class BaseFragment<C, V : BasePresenter.BaseView, P : BasePresenter<V>>
                                savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-        presenter.attachView(getMVPViewReference())
+        getPresenter().attachView(getMVPViewReference())
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -51,12 +51,12 @@ abstract class BaseFragment<C, V : BasePresenter.BaseView, P : BasePresenter<V>>
 
     override fun onStart() {
         super.onStart()
-        presenter.attachView(getMVPViewReference())
+        getPresenter().attachView(getMVPViewReference())
     }
 
     override fun onPause() {
         super.onPause()
-        presenter.detachView()
+        getPresenter().detachView()
     }
 
     override fun onDetach() {
