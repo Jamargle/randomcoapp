@@ -13,6 +13,7 @@ class UsersPresenter(private val repository: UsersRepository,
                      private val sorter: UsersSorter) : BasePresenterImp<UsersPresenter.UsersView>() {
 
     private val disposables = CompositeDisposable()
+    private val users: MutableList<User> = mutableListOf()
 
     fun onViewInitialized() {
         getView()?.showLoading()
@@ -23,7 +24,8 @@ class UsersPresenter(private val repository: UsersRepository,
     }
 
     private fun handleSuccessResult(users: List<User>) {
-        val sortedUsers = sorter.sortByName(users)
+        this.users.addAll(users)
+        val sortedUsers = sorter.sortByName(this.users)
         getView()?.let {
             it.hideLoading()
             it.showUsers(sortedUsers)
@@ -37,6 +39,29 @@ class UsersPresenter(private val repository: UsersRepository,
         }
     }
 
+    fun onDeleteUserClicked(user: User) {
+        getView()?.showLoading()
+        disposables.add(repository.removeUser(user)
+            .subscribeOn(schedulers.getBackgroundThread())
+            .observeOn(schedulers.getUiThread())
+            .subscribe(this::handleSuccessDeletedResult, this::handleErrorDeleteResult))
+    }
+
+    private fun handleSuccessDeletedResult(userRemoved: User) {
+        this.users.remove(userRemoved)
+        getView()?.let {
+            it.hideLoading()
+            it.removeUserFromList(userRemoved)
+        }
+    }
+
+    private fun handleErrorDeleteResult(error: Throwable) {
+        getView()?.let {
+            it.hideLoading()
+            it.showError(error.message ?: "Unknown error")
+        }
+    }
+
     interface UsersView : BasePresenter.BaseView {
 
         fun showLoading()
@@ -44,6 +69,8 @@ class UsersPresenter(private val repository: UsersRepository,
         fun hideLoading()
 
         fun showUsers(users: List<User>)
+
+        fun removeUserFromList(userRemoved: User)
 
         fun showError(errorMessage: String)
 

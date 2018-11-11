@@ -27,8 +27,17 @@ class UsersAdapter(private val listener: OnUserClickListener) :
         notifyDataSetChanged()
     }
 
+    fun removeUser(userRemoved: User) {
+        val position = usersToShow.indexOf(userRemoved)
+        if (position > -1) {
+            usersToShow.removeAt(position)
+            notifyItemRemoved(position)
+        }
+    }
+
     interface OnUserClickListener {
         fun onUserClicked(user: User)
+        fun onDeleteUserClicked(user: User)
     }
 
 }

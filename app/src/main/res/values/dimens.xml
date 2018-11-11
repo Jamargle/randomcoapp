@@ -5,4 +5,5 @@
 	<dimen name="user_avatar_size">100dp</dimen>
 	<dimen name="list_name_text_size">20sp</dimen>
 	<dimen name="margin_small">4dp</dimen>
+	<dimen name="user_card_height">150dp</dimen>
 </resources>

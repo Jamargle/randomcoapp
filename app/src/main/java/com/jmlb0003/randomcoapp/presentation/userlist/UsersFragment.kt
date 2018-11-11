@@ -43,6 +43,10 @@ class UsersFragment : BaseFragment<UsersFragment.Callback, UsersPresenter.UsersV
         adapter.showUsers(users)
     }
 
+    override fun removeUserFromList(userRemoved: User) {
+        adapter.removeUser(userRemoved)
+    }
+
     override fun showError(errorMessage: String) {
         adapter.showUsers(emptyList())
         callback?.onShowError(errorMessage)
@@ -50,6 +54,10 @@ class UsersFragment : BaseFragment<UsersFragment.Callback, UsersPresenter.UsersV
 
     override fun onUserClicked(user: User) {
         callback?.onUserClicked(user)
+    }
+
+    override fun onDeleteUserClicked(user: User) {
+        presenterInstance.onDeleteUserClicked(user)
     }
 
     interface Callback {

@@ -7,4 +7,6 @@ interface UsersRepository {
 
     fun getUsers(): Single<List<User>>
 
+    fun removeUser(user: User): Single<User>
+
 }

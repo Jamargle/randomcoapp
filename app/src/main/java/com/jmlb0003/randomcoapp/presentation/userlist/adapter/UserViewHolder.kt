@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.jmlb0003.randomcoapp.domain.model.User
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.item_list_user.view.delete_user
 import kotlinx.android.synthetic.main.item_list_user.view.user_email
 import kotlinx.android.synthetic.main.item_list_user.view.user_name
 import kotlinx.android.synthetic.main.item_list_user.view.user_phone
@@ -23,6 +24,7 @@ class UserViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         view.user_phone.text = user.phone
 
         view.user_picture.setOnClickListener { listener.onUserClicked(view.tag as User) }
+        view.delete_user.setOnClickListener { listener.onDeleteUserClicked(view.tag as User) }
     }
 
 }
