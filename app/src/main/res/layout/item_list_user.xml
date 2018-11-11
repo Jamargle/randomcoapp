@@ -80,6 +80,15 @@
 				app:layout_constraintTop_toTopOf="parent"
 				app:srcCompat="@android:drawable/ic_menu_delete"/>
 
+		<ImageButton
+				android:id="@+id/favorite_button"
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:contentDescription="@null"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:srcCompat="@android:drawable/star_big_off"/>
+
 	</android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>

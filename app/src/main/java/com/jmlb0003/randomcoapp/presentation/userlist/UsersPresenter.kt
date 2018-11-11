@@ -68,6 +68,32 @@ class UsersPresenter(private val repository: UsersRepository,
         }
     }
 
+    fun onFavoriteClicked(user: User) {
+        getView()?.showLoading()
+        disposables.add(repository.swapFavorite(user)
+            .subscribeOn(schedulers.getBackgroundThread())
+            .observeOn(schedulers.getUiThread())
+            .subscribe(this::handleSuccessSwapFavoriteResult, this::handleErrorSwapFavoriteResult))
+    }
+
+    private fun handleSuccessSwapFavoriteResult(user: User) {
+        getView()?.let { view ->
+            view.hideLoading()
+            if (user.isFavorite) {
+                view.swapToFavorite(user)
+            } else {
+                view.swapToNoFavorite(user)
+            }
+        }
+    }
+
+    private fun handleErrorSwapFavoriteResult(error: Throwable) {
+        getView()?.let {
+            it.hideLoading()
+            it.showError(error.message ?: "Unknown error")
+        }
+    }
+
     fun loadUsers(usersToShow: List<User>?) {
         usersToShow?.let { getView()?.showUsers(it) }
     }
@@ -81,6 +107,10 @@ class UsersPresenter(private val repository: UsersRepository,
         fun showUsers(users: List<User>)
 
         fun removeUserFromList(userRemoved: User)
+
+        fun swapToFavorite(user: User)
+
+        fun swapToNoFavorite(user: User)
 
         fun showError(errorMessage: String)
 

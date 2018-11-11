@@ -7,6 +7,8 @@ interface UsersRepository {
 
     fun getUsers(): Single<List<User>>
 
+    fun swapFavorite(user: User): Single<User>
+
     fun removeUser(user: User): Single<User>
 
 }

@@ -12,7 +12,7 @@ data class User(val name: String,
                 val gender: Gender,
                 val registeredDate: Date?,
                 val location: Location,
-                val isFavorite: Boolean = false) : Parcelable {
+                var isFavorite: Boolean = false) : Parcelable {
 
     constructor(parcel: Parcel) : this(
             parcel.readString() ?: "",
