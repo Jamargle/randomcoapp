@@ -119,6 +119,14 @@ class UsersPresenter(private val repository: UsersRepository,
         handleErrorResult(error)
     }
 
+    fun onShowOnlyFavoriteUsers() {
+        getView()?.showUsers(users.filter { user -> user.isFavorite })
+    }
+
+    fun onShowUsersWithoutFilter() {
+        getView()?.showUsers(users)
+    }
+
     interface UsersView : BasePresenter.BaseView {
 
         fun showLoading()

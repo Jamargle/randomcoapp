@@ -62,13 +62,11 @@ class UsersFragment : BaseFragment<UsersFragment.Callback, UsersPresenter.UsersV
     }
 
     fun showOnlyFavoriteUsers() {
-        // TODO
-//        presenterInstance.onShowOnlyFavoriteUsers()
+        presenterInstance.onShowOnlyFavoriteUsers()
     }
 
     fun showEveryUser() {
-        // TODO
-//        presenterInstance.onShowUsersWithoutFilter()
+        presenterInstance.onShowUsersWithoutFilter()
     }
 
     override fun showLoading() {
