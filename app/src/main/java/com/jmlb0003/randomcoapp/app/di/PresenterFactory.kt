@@ -1,5 +1,6 @@
 package com.jmlb0003.randomcoapp.app.di
 
+import com.jmlb0003.randomcoapp.app.ErrorHandler
 import com.jmlb0003.randomcoapp.app.Schedulers
 import com.jmlb0003.randomcoapp.data.UsersSorter
 import com.jmlb0003.randomcoapp.presentation.userlist.MainActivityPresenter
@@ -11,7 +12,8 @@ object PresenterFactory {
         val repository = RepositoryFactory.createUsersRepository()
         val schedulers = Schedulers
         val sorter = UsersSorter
-        UsersPresenter(repository, schedulers, sorter)
+        val errorHandler = ErrorHandler
+        UsersPresenter(repository, schedulers, sorter, errorHandler)
     }
 
     private val mainActivityPresenterInstance: MainActivityPresenter by lazy {

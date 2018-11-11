@@ -64,4 +64,7 @@ abstract class BaseFragment<C, V : BasePresenter.BaseView, P : BasePresenter<V>>
         callback = null
     }
 
+    // TODO check if network is available
+    protected fun hasNetworkConnection() = true
+
 }
