@@ -9,6 +9,12 @@ class MainActivityPresenter : BasePresenterImp<MainActivityPresenter.MainActivit
 
     override fun getErrorHandler(): ErrorHandler? = null
 
+    fun onCreated(isTablet: Boolean) {
+        if (isTablet) {
+            getView()?.showFavorites()
+        }
+    }
+
     fun onShowLoadingFromUsersFragment() {
         getView()?.showLoading()
     }
@@ -32,6 +38,8 @@ class MainActivityPresenter : BasePresenterImp<MainActivityPresenter.MainActivit
         fun hideLoading()
 
         fun showUserDetails(user: User)
+
+        fun showFavorites()
 
         fun showError(errorMessage: String)
 
