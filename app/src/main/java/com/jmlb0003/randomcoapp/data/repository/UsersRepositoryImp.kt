@@ -12,14 +12,15 @@ import java.io.IOException
 private const val USERS_COUNT = 40
 
 class UsersRepositoryImp(private val apiClient: UserApiClient,
-                         private val parser: UserParser) : UsersRepository {
+                         private val parser: UserParser,
+                         private val repeatedUsersChecker: RepeatedUsersChecker) : UsersRepository {
 
     override fun getUsers(): Single<List<User>> {
         return Single.create { emitter ->
             try {
                 apiClient.getRandomUsers(USERS_COUNT).execute().body()?.let { response ->
                     val parsedResponse = parseResponse(response)
-                    emitter.onSuccess(RepeatedUsersChecker.removeDuplicatedUsers(parsedResponse))
+                    emitter.onSuccess(repeatedUsersChecker.removeDuplicatedUsers(parsedResponse))
                 }
             } catch (e: IOException) {
                 emitter.onError(Throwable(e.message))
