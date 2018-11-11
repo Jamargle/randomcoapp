@@ -4,12 +4,15 @@ import com.jmlb0003.randomcoapp.MockSchedulers
 import com.jmlb0003.randomcoapp.TestData
 import com.jmlb0003.randomcoapp.domain.model.User
 import com.jmlb0003.randomcoapp.domain.repository.UsersRepository
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Single
 import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
@@ -48,7 +51,25 @@ class UsersPresenterTest {
 
         presenter.onViewInitialized()
 
-        verify(view, times(1)).showUsers(expectedUsers)
+        verify(view, times(1)).showUsers(any())
+    }
+
+    @Test
+    fun `sort users by name on onViewInitialized`() {
+        val expectedUsers: List<User> = listOf(TestData.User1.USER.copy(name = "b"),
+                TestData.User1.USER.copy(name = "c"),
+                TestData.User1.USER.copy(name = "a"))
+        whenever(repository.getUsers()).thenReturn(Single.just(expectedUsers))
+
+        presenter.onViewInitialized()
+
+        argumentCaptor<List<User>>().apply {
+            verify(view, times(1)).showUsers(capture())
+
+            assertEquals("a", firstValue[0].name)
+            assertEquals("b", firstValue[1].name)
+            assertEquals("c", firstValue[2].name)
+        }
     }
 
 }

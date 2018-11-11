@@ -5,7 +5,7 @@ import com.jmlb0003.randomcoapp.data.network.servicemodel.User
 import com.jmlb0003.randomcoapp.data.network.servicemodel.UsersApiResponse
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
-import org.junit.Assert.assertSame
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -32,11 +32,11 @@ class UserParserTest {
 
         val result = parser.parseUserResponse(response)
 
-        assertSame(2, result.size)
+        assertEquals(2, result.size)
         with(result[0]) {
-            assertSame(TestData.NetworkUser1.FIRST_NAME, name)
-            assertSame(TestData.NetworkUser1.LAST_NAME, surname)
-            assertSame(TestData.NetworkUser1.EMAIL1, email)
+            assertEquals(TestData.NetworkUser1.FIRST_NAME, name)
+            assertEquals(TestData.NetworkUser1.LAST_NAME, surname)
+            assertEquals(TestData.NetworkUser1.EMAIL1, email)
         }
     }
 
@@ -62,7 +62,7 @@ class UserParserTest {
 
         val result = parser.parseUserResponse(response)
 
-        assertSame(phone, result[0].phone)
+        assertEquals(phone, result[0].phone)
     }
 
     @Test
@@ -87,7 +87,7 @@ class UserParserTest {
 
         val result = parser.parseUserResponse(response)
 
-        assertSame(cellPhone, result[0].phone)
+        assertEquals(cellPhone, result[0].phone)
     }
 
     @Test
@@ -112,7 +112,7 @@ class UserParserTest {
 
         val result = parser.parseUserResponse(response)
 
-        assertSame(cellPhone, result[0].phone)
+        assertEquals(cellPhone, result[0].phone)
     }
 
 }
