@@ -15,6 +15,8 @@ import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Single
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
@@ -73,6 +75,54 @@ class UsersPresenterTest {
             assertEquals("a", firstValue[0].name)
             assertEquals("b", firstValue[1].name)
             assertEquals("c", firstValue[2].name)
+        }
+    }
+
+    @Test
+    fun `show only favorite users on onShowOnlyFavoriteUsers`() {
+        val expectedUsers: List<User> = listOf(TestData.User1.USER.copy(name = "a", isFavorite = true),
+                TestData.User1.USER.copy(name = "b", isFavorite = false),
+                TestData.User1.USER.copy(name = "c", isFavorite = false))
+        whenever(repository.getUsers()).thenReturn(Single.just(expectedUsers))
+        presenter.onViewInitialized()
+        presenter.onShowOnlyFavoriteUsers()
+
+        argumentCaptor<List<User>>().apply {
+            verify(view, times(2)).showUsers(capture())
+
+            assertTrue(allValues[0][0].isFavorite)
+            assertFalse(allValues[0][1].isFavorite)
+            assertFalse(allValues[0][2].isFavorite)
+
+            assertEquals(1, allValues[1].size)
+            assertTrue(allValues[1][0].isFavorite)
+        }
+    }
+
+    @Test
+    fun `show every users after filter by favorites on onShowUsersWithoutFilter`() {
+        val expectedUsers: List<User> = listOf(TestData.User1.USER.copy(name = "a", isFavorite = true),
+                TestData.User1.USER.copy(name = "b", isFavorite = false),
+                TestData.User1.USER.copy(name = "c", isFavorite = false))
+        whenever(repository.getUsers()).thenReturn(Single.just(expectedUsers))
+        presenter.onViewInitialized()
+        presenter.onShowOnlyFavoriteUsers()
+        presenter.onShowUsersWithoutFilter()
+
+        argumentCaptor<List<User>>().apply {
+            verify(view, times(3)).showUsers(capture())
+
+            assertTrue(allValues[0][0].isFavorite)
+            assertFalse(allValues[0][1].isFavorite)
+            assertFalse(allValues[0][2].isFavorite)
+
+            assertEquals(1, allValues[1].size)
+            assertTrue(allValues[1][0].isFavorite)
+
+            assertEquals(3, allValues[2].size)
+            assertTrue(allValues[2][0].isFavorite)
+            assertFalse(allValues[2][1].isFavorite)
+            assertFalse(allValues[2][2].isFavorite)
         }
     }
 
