@@ -1,5 +1,6 @@
 package com.jmlb0003.randomcoapp.data.repository
 
+import com.jmlb0003.randomcoapp.data.RepeatedUsersChecker
 import com.jmlb0003.randomcoapp.data.UserApiClient
 import com.jmlb0003.randomcoapp.data.network.UserParser
 import com.jmlb0003.randomcoapp.data.network.servicemodel.UsersApiResponse
@@ -17,7 +18,8 @@ class UsersRepositoryImp(private val apiClient: UserApiClient,
         return Single.create { emitter ->
             try {
                 apiClient.getRandomUsers(USERS_COUNT).execute().body()?.let { response ->
-                    emitter.onSuccess(parseResponse(response))
+                    val parsedResponse = parseResponse(response)
+                    emitter.onSuccess(RepeatedUsersChecker.removeDuplicatedUsers(parsedResponse))
                 }
             } catch (e: IOException) {
                 emitter.onError(Throwable(e.message))

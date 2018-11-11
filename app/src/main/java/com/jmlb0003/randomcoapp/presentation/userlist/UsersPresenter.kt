@@ -39,14 +39,6 @@ class UsersPresenter(private val repository: UsersRepository,
         }
     }
 
-    private fun displayLoading() {
-        // TODO
-    }
-
-    private fun hideLoading() {
-        // TODO
-    }
-
     interface UsersView : BasePresenter.BaseView {
 
         fun showLoading()
