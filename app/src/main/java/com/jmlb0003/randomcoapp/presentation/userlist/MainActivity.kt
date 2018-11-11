@@ -1,30 +1,59 @@
 package com.jmlb0003.randomcoapp.presentation.userlist
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.jmlb0003.randomcoapp.R
+import com.jmlb0003.randomcoapp.app.di.PresenterFactory
+import com.jmlb0003.randomcoapp.domain.model.User
+import com.jmlb0003.randomcoapp.presentation.BaseActivity
 
-class MainActivity : AppCompatActivity(), UsersFragment.Callback {
+class MainActivity : BaseActivity<MainActivityPresenter.MainActivityView, MainActivityPresenter>(),
+                     MainActivityPresenter.MainActivityView,
+                     UsersFragment.Callback {
+
+    override fun getPresenter(): MainActivityPresenter = PresenterFactory.createMainActivityPresenter()
+
+    override fun getMVPViewReference(): MainActivityPresenter.MainActivityView = this
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
 
-    override fun onShowLoading() {
+    override fun showLoading() {
         // TODO
         Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onHideLoading() {
+    override fun hideLoading() {
         // TODO
         Toast.makeText(this, "NOT Loading...", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onShowError(errorMessage: String) {
+    override fun showUserDetails(user: User) {
+        //TODO
+        Toast.makeText(this, "Showing user details for: ${user.name}", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showError(errorMessage: String) {
         // TODO
         Toast.makeText(this, "Error: $errorMessage", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onShowLoading() {
+        getPresenter().onShowLoadingFromUsersFragment()
+    }
+
+    override fun onHideLoading() {
+        getPresenter().onHideLoadingFromUsersFragment()
+    }
+
+    override fun onShowError(errorMessage: String) {
+        getPresenter().onShowErrorFromUsersFragment(errorMessage)
+    }
+
+    override fun onUserClicked(user: User) {
+        getPresenter().onUserClicked(user)
     }
 
 }

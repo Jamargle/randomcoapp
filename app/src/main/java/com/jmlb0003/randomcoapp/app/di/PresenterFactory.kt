@@ -1,6 +1,7 @@
 package com.jmlb0003.randomcoapp.app.di
 
 import com.jmlb0003.randomcoapp.app.Schedulers
+import com.jmlb0003.randomcoapp.presentation.userlist.MainActivityPresenter
 import com.jmlb0003.randomcoapp.presentation.userlist.UsersPresenter
 
 object PresenterFactory {
@@ -11,6 +12,12 @@ object PresenterFactory {
         UsersPresenter(repository, schedulers)
     }
 
+    private val mainActivityPresenterInstance: MainActivityPresenter by lazy {
+        MainActivityPresenter()
+    }
+
     fun createUsersFragmentPresenter(): UsersPresenter = usersPresenterInstance
+
+    fun createMainActivityPresenter(): MainActivityPresenter = mainActivityPresenterInstance
 
 }

@@ -49,7 +49,7 @@ class UsersFragment : BaseFragment<UsersFragment.Callback, UsersPresenter.UsersV
     }
 
     override fun onUserClicked(user: User) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        callback?.onUserClicked(user)
     }
 
     interface Callback {
@@ -59,6 +59,8 @@ class UsersFragment : BaseFragment<UsersFragment.Callback, UsersPresenter.UsersV
         fun onHideLoading()
 
         fun onShowError(errorMessage: String)
+
+        fun onUserClicked(user: User)
 
     }
 
