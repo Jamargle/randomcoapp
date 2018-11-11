@@ -60,6 +60,10 @@ class UsersFragment : BaseFragment<UsersFragment.Callback, UsersPresenter.UsersV
         presenterInstance.onDeleteUserClicked(user)
     }
 
+    override fun onFavoriteClicked(user: User) {
+        presenterInstance.onFavoriteClicked(user)
+    }
+
     interface Callback {
 
         fun onShowLoading()

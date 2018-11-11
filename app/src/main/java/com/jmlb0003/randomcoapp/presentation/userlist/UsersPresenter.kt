@@ -62,6 +62,9 @@ class UsersPresenter(private val repository: UsersRepository,
         }
     }
 
+    fun onFavoriteClicked(user: User) {
+    }
+
     interface UsersView : BasePresenter.BaseView {
 
         fun showLoading()
