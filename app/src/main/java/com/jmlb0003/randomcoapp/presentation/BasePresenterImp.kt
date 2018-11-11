@@ -19,4 +19,8 @@ abstract class BasePresenterImp<V : BasePresenter.BaseView> : BasePresenter<V> {
         }
     }
 
+    fun onNoNetworkConnection() {
+        // TODO Show a dialog to go to settings
+    }
+
 }

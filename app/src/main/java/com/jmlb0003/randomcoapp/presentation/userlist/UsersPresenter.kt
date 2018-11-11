@@ -62,6 +62,10 @@ class UsersPresenter(private val repository: UsersRepository,
         }
     }
 
+    fun loadUsers(usersToShow: List<User>?) {
+        usersToShow?.let { getView()?.showUsers(it) }
+    }
+
     interface UsersView : BasePresenter.BaseView {
 
         fun showLoading()

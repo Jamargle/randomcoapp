@@ -8,6 +8,9 @@ import com.jmlb0003.randomcoapp.domain.model.User
 import com.jmlb0003.randomcoapp.presentation.BaseFragment
 import com.jmlb0003.randomcoapp.presentation.userlist.adapter.UsersAdapter
 import kotlinx.android.synthetic.main.fragment_users_list.view.user_list_view
+import java.util.ArrayList
+
+private const val SAVED_LIST_OF_USERS = "UsersFragment:users"
 
 class UsersFragment : BaseFragment<UsersFragment.Callback, UsersPresenter.UsersView, UsersPresenter>(),
                       UsersPresenter.UsersView,
@@ -27,8 +30,31 @@ class UsersFragment : BaseFragment<UsersFragment.Callback, UsersPresenter.UsersV
         super.onViewCreated(view, savedInstanceState)
         adapter = UsersAdapter(this@UsersFragment)
         view.user_list_view.adapter = adapter
+    }
 
-        presenterInstance.onViewInitialized()
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        if (hasNetworkConnection()) {
+            if (savedInstanceState != null) {
+                recoverState(savedInstanceState)
+            } else {
+                presenterInstance.onViewInitialized()
+            }
+        } else {
+            presenterInstance.onNoNetworkConnection()
+        }
+    }
+
+    private fun recoverState(state: Bundle) {
+        if (state.containsKey(SAVED_LIST_OF_USERS)) {
+            presenterInstance.loadUsers(state.getParcelableArrayList(SAVED_LIST_OF_USERS))
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        val users: java.util.ArrayList<User> = adapter.getUsers() as ArrayList<User>
+        outState.putParcelableArrayList(SAVED_LIST_OF_USERS, users)
+        super.onSaveInstanceState(outState)
     }
 
     override fun showLoading() {
