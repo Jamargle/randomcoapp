@@ -11,7 +11,7 @@ class MainActivityPresenter : BasePresenterImp<MainActivityPresenter.MainActivit
 
     fun onCreated(isTablet: Boolean) {
         if (isTablet) {
-            getView()?.showFavorites()
+            getView()?.showFavoritesScreen()
         }
     }
 
@@ -31,6 +31,18 @@ class MainActivityPresenter : BasePresenterImp<MainActivityPresenter.MainActivit
         getView()?.showUserDetails(user)
     }
 
+    fun onLoadMoreUsers() {
+        getView()?.loadMoreUsers()
+    }
+
+    fun onShowFavoriteCharacters() {
+        getView()?.showOnlyFavorites()
+    }
+
+    fun onShowEveryUser() {
+        getView()?.showEveryUser()
+    }
+
     interface MainActivityView : BasePresenter.BaseView {
 
         fun showLoading()
@@ -39,7 +51,13 @@ class MainActivityPresenter : BasePresenterImp<MainActivityPresenter.MainActivit
 
         fun showUserDetails(user: User)
 
-        fun showFavorites()
+        fun showFavoritesScreen()
+
+        fun loadMoreUsers()
+
+        fun showOnlyFavorites()
+
+        fun showEveryUser()
 
         fun showError(errorMessage: String)
 

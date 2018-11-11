@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">RandomCoApp</string>
+	<string name="app_name">RandomCoApp</string>
 	<string name="address">Address:</string>
 	<string name="gender">Gender:</string>
+	<string name="action_search">Search</string>
+	<string name="action_load_more">Load more</string>
+	<string name="action_show_favorites_title">Show only Favorites</string>
+	<string name="action_show_everyone_title">Show every user</string>
 </resources>

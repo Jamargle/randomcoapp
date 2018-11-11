@@ -31,7 +31,7 @@
 				android:layout_marginStart="@dimen/user_list_horizontal_margin"
 				android:textAppearance="?attr/textAppearanceListItem"
 				android:textSize="@dimen/list_name_text_size"
-				app:layout_constraintEnd_toEndOf="@id/delete_user"
+				app:layout_constraintEnd_toStartOf="@+id/delete_user"
 				app:layout_constraintStart_toEndOf="@+id/user_picture"
 				app:layout_constraintTop_toTopOf="parent"
 				tools:text="Name of user"/>
@@ -43,7 +43,7 @@
 				android:layout_marginStart="@dimen/user_list_horizontal_margin"
 				android:textAppearance="?attr/textAppearanceListItem"
 				android:textSize="@dimen/list_name_text_size"
-				app:layout_constraintEnd_toEndOf="@id/delete_user"
+				app:layout_constraintEnd_toStartOf="@id/delete_user"
 				app:layout_constraintStart_toEndOf="@id/user_picture"
 				app:layout_constraintTop_toBottomOf="@+id/user_name"
 				tools:text="The Surname of the User"/>
@@ -55,7 +55,7 @@
 				android:layout_marginStart="@dimen/user_list_horizontal_margin"
 				android:layout_marginTop="@dimen/margin_normal"
 				android:textAppearance="?attr/textAppearanceListItem"
-				app:layout_constraintEnd_toEndOf="@id/delete_user"
+				app:layout_constraintEnd_toStartOf="@+id/favorite_button"
 				app:layout_constraintStart_toEndOf="@id/user_picture"
 				app:layout_constraintTop_toBottomOf="@+id/user_surname"
 				tools:text="asdasdas@asdasdsa.com"/>
@@ -66,7 +66,7 @@
 				android:layout_width="0dp"
 				android:layout_marginStart="@dimen/user_list_horizontal_margin"
 				android:textAppearance="?attr/textAppearanceListItem"
-				app:layout_constraintEnd_toEndOf="@id/delete_user"
+				app:layout_constraintEnd_toStartOf="@+id/favorite_button"
 				app:layout_constraintStart_toEndOf="@id/user_picture"
 				app:layout_constraintTop_toBottomOf="@id/user_email"
 				tools:text="1234 124 123 345"/>

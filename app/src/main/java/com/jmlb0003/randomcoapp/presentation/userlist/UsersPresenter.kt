@@ -98,6 +98,35 @@ class UsersPresenter(private val repository: UsersRepository,
         usersToShow?.let { getView()?.showUsers(it) }
     }
 
+    fun onLoadMoreUsers() {
+        getView()?.showLoading()
+        disposables.add(repository.getUsers()
+            .subscribeOn(schedulers.getBackgroundThread())
+            .observeOn(schedulers.getUiThread())
+            .subscribe(this::handleSuccessLoadMoreResult, this::handleErrorLoadMoreResult))
+    }
+
+    private fun handleSuccessLoadMoreResult(users: List<User>) {
+        this.users.addAll(users)
+        val sortedUsers = sorter.sortByName(this.users)
+        getView()?.let {
+            it.hideLoading()
+            it.showUsers(sortedUsers)
+        }
+    }
+
+    private fun handleErrorLoadMoreResult(error: Throwable) {
+        handleErrorResult(error)
+    }
+
+    fun onShowOnlyFavoriteUsers() {
+        getView()?.showUsers(users.filter { user -> user.isFavorite })
+    }
+
+    fun onShowUsersWithoutFilter() {
+        getView()?.showUsers(users)
+    }
+
     interface UsersView : BasePresenter.BaseView {
 
         fun showLoading()
