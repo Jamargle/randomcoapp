@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		tools:context=".presentation.userlist.MainActivity"
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:tools="http://schemas.android.com/tools">
+
+	<fragment
+			android:id="@+id/character_list_fragment"
+			android:layout_height="match_parent"
+			android:layout_width="match_parent"
+			android:name="com.jmlb0003.randomcoapp.presentation.userlist.UsersFragment"
+			tools:layout="@layout/item_list_user"/>
+
+</FrameLayout>
