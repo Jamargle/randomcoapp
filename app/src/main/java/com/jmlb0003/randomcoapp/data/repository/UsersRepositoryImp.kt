@@ -33,6 +33,14 @@ class UsersRepositoryImp(private val apiClient: UserApiClient,
 
     private fun parseResponse(response: UsersApiResponse): List<User> = parser.parseUserResponse(response)
 
+    override fun swapFavorite(user: User): Single<User> {
+        return Single.create { emitter ->
+            user.isFavorite = !user.isFavorite
+            // TODO apply the change in the data source
+            emitter.onSuccess(user)
+        }
+    }
+
     override fun removeUser(user: User): Single<User> {
         return Single.create { emitter ->
             // TODO Remove user from whatever source of data

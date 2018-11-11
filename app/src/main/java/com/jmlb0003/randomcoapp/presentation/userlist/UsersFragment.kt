@@ -47,6 +47,14 @@ class UsersFragment : BaseFragment<UsersFragment.Callback, UsersPresenter.UsersV
         adapter.removeUser(userRemoved)
     }
 
+    override fun swapToFavorite(user: User) {
+        adapter.setFavorite(user, true)
+    }
+
+    override fun swapToNoFavorite(user: User) {
+        adapter.setFavorite(user, false)
+    }
+
     override fun showError(errorMessage: String) {
         adapter.showUsers(emptyList())
         callback?.onShowError(errorMessage)
