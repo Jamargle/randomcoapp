@@ -57,6 +57,20 @@ class UsersFragment : BaseFragment<UsersFragment.Callback, UsersPresenter.UsersV
         super.onSaveInstanceState(outState)
     }
 
+    fun loadMoreUsers() {
+        presenterInstance.onLoadMoreUsers()
+    }
+
+    fun showOnlyFavoriteUsers() {
+        // TODO
+//        presenterInstance.onShowOnlyFavoriteUsers()
+    }
+
+    fun showEveryUser() {
+        // TODO
+//        presenterInstance.onShowUsersWithoutFilter()
+    }
+
     override fun showLoading() {
         callback?.onShowLoading()
     }
