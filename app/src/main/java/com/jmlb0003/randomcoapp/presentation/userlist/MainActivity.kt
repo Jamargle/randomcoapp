@@ -8,6 +8,7 @@ import com.jmlb0003.randomcoapp.app.di.PresenterFactory
 import com.jmlb0003.randomcoapp.domain.model.User
 import com.jmlb0003.randomcoapp.presentation.BaseActivity
 import com.jmlb0003.randomcoapp.presentation.details.DetailsActivity
+import com.jmlb0003.randomcoapp.presentation.favorites.FavoritesFragment
 
 class MainActivity : BaseActivity<MainActivityPresenter.MainActivityView, MainActivityPresenter>(),
                      MainActivityPresenter.MainActivityView,
@@ -20,6 +21,7 @@ class MainActivity : BaseActivity<MainActivityPresenter.MainActivityView, MainAc
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        getPresenter().onCreated(resources.getBoolean(R.bool.isTablet))
     }
 
     override fun showLoading() {
@@ -35,6 +37,12 @@ class MainActivity : BaseActivity<MainActivityPresenter.MainActivityView, MainAc
     override fun showUserDetails(user: User) {
         val intent = Intent(this, DetailsActivity::class.java)
         startActivity(intent.putExtras(DetailsActivity.newBundle(user)))
+    }
+
+    override fun showFavorites() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.user_favorites, FavoritesFragment.newInstance())
+            .commit()
     }
 
     override fun showError(errorMessage: String) {
