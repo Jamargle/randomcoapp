@@ -33,4 +33,12 @@ class UsersRepositoryImp(private val apiClient: UserApiClient,
 
     private fun parseResponse(response: UsersApiResponse): List<User> = parser.parseUserResponse(response)
 
+    override fun removeUser(user: User): Single<User> {
+        return Single.create { emitter ->
+            // TODO Remove user from whatever source of data
+            emitter.onSuccess(user)
+            // TODO emitter.onError(Throwable("Error deleting the user"))
+        }
+    }
+
 }
