@@ -2,6 +2,7 @@ package com.jmlb0003.randomcoapp.presentation.userlist
 
 import com.jmlb0003.randomcoapp.MockSchedulers
 import com.jmlb0003.randomcoapp.TestData
+import com.jmlb0003.randomcoapp.data.UsersSorter
 import com.jmlb0003.randomcoapp.domain.model.User
 import com.jmlb0003.randomcoapp.domain.repository.UsersRepository
 import com.nhaarman.mockitokotlin2.any
@@ -20,9 +21,10 @@ class UsersPresenterTest {
 
     private val repository = mock<UsersRepository>()
     private val schedulers = MockSchedulers
+    private val sorter = UsersSorter
     private val view = mock<UsersPresenter.UsersView>()
 
-    private val presenter: UsersPresenter = UsersPresenter(repository, schedulers)
+    private val presenter: UsersPresenter = UsersPresenter(repository, schedulers, sorter)
 
     @Before
     fun setUp() {
@@ -55,7 +57,7 @@ class UsersPresenterTest {
     }
 
     @Test
-    fun `sort users by name on onViewInitialized`() {
+    fun `show users sort users by name on onViewInitialized`() {
         val expectedUsers: List<User> = listOf(TestData.User1.USER.copy(name = "b"),
                 TestData.User1.USER.copy(name = "c"),
                 TestData.User1.USER.copy(name = "a"))

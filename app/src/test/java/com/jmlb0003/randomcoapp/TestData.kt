@@ -37,7 +37,7 @@ object TestData {
     object User2 {
         val NAME2 = "Another name"
         val SURNAME2 = "Another surname"
-        val EMAIL2 = "An email"
+        val EMAIL2 = "Another email"
         val PICTURE2 = "A path to a picture"
         val PHONE2 = "1234567"
         val GENDER2 = Gender.Female
