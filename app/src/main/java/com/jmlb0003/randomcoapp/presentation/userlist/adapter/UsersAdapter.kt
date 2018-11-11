@@ -41,6 +41,8 @@ class UsersAdapter(private val listener: OnUserClickListener) :
         notifyItemChanged(position)
     }
 
+    fun getUsers(): List<User> = usersToShow
+
     interface OnUserClickListener {
         fun onUserClicked(user: User)
         fun onDeleteUserClicked(user: User)

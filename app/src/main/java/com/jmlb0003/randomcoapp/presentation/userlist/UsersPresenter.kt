@@ -1,5 +1,6 @@
 package com.jmlb0003.randomcoapp.presentation.userlist
 
+import com.jmlb0003.randomcoapp.app.ErrorHandler
 import com.jmlb0003.randomcoapp.data.UsersSorter
 import com.jmlb0003.randomcoapp.domain.TasksSchedulers
 import com.jmlb0003.randomcoapp.domain.model.User
@@ -10,10 +11,13 @@ import io.reactivex.disposables.CompositeDisposable
 
 class UsersPresenter(private val repository: UsersRepository,
                      private val schedulers: TasksSchedulers,
-                     private val sorter: UsersSorter) : BasePresenterImp<UsersPresenter.UsersView>() {
+                     private val sorter: UsersSorter,
+                     private val errorHandler: ErrorHandler) : BasePresenterImp<UsersPresenter.UsersView>() {
 
     private val disposables = CompositeDisposable()
     private val users: MutableList<User> = mutableListOf()
+
+    override fun getErrorHandler(): ErrorHandler? = errorHandler
 
     fun onViewInitialized() {
         getView()?.showLoading()
@@ -33,6 +37,7 @@ class UsersPresenter(private val repository: UsersRepository,
     }
 
     private fun handleErrorResult(error: Throwable) {
+        errorHandler.handleError(error)
         getView()?.let {
             it.hideLoading()
             it.showError(error.message ?: "Unknown error")
@@ -56,6 +61,7 @@ class UsersPresenter(private val repository: UsersRepository,
     }
 
     private fun handleErrorDeleteResult(error: Throwable) {
+        errorHandler.handleError(error)
         getView()?.let {
             it.hideLoading()
             it.showError(error.message ?: "Unknown error")
@@ -86,6 +92,10 @@ class UsersPresenter(private val repository: UsersRepository,
             it.hideLoading()
             it.showError(error.message ?: "Unknown error")
         }
+    }
+
+    fun loadUsers(usersToShow: List<User>?) {
+        usersToShow?.let { getView()?.showUsers(it) }
     }
 
     interface UsersView : BasePresenter.BaseView {
