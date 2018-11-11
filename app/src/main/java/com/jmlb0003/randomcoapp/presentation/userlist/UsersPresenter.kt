@@ -21,10 +21,15 @@ class UsersPresenter(private val repository: UsersRepository,
     }
 
     private fun handleSuccessResult(users: List<User>) {
+        val sortedUsers = sortUsersByName(users)
         getView()?.let {
             it.hideLoading()
-            it.showUsers(users)
+            it.showUsers(sortedUsers)
         }
+    }
+
+    private fun sortUsersByName(users: List<User>): List<User> {
+        return users.sortedBy { it.name }
     }
 
     private fun handleErrorResult(error: Throwable) {
