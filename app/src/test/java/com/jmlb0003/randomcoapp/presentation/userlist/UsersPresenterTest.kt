@@ -2,6 +2,7 @@ package com.jmlb0003.randomcoapp.presentation.userlist
 
 import com.jmlb0003.randomcoapp.MockSchedulers
 import com.jmlb0003.randomcoapp.TestData
+import com.jmlb0003.randomcoapp.app.ErrorHandler
 import com.jmlb0003.randomcoapp.data.UsersSorter
 import com.jmlb0003.randomcoapp.domain.model.User
 import com.jmlb0003.randomcoapp.domain.repository.UsersRepository
@@ -22,9 +23,10 @@ class UsersPresenterTest {
     private val repository = mock<UsersRepository>()
     private val schedulers = MockSchedulers
     private val sorter = UsersSorter
+    private val errorHandler = ErrorHandler
     private val view = mock<UsersPresenter.UsersView>()
 
-    private val presenter: UsersPresenter = UsersPresenter(repository, schedulers, sorter)
+    private val presenter: UsersPresenter = UsersPresenter(repository, schedulers, sorter, errorHandler)
 
     @Before
     fun setUp() {
