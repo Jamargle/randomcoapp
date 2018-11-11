@@ -1,11 +1,13 @@
 package com.jmlb0003.randomcoapp.presentation.userlist
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import com.jmlb0003.randomcoapp.R
 import com.jmlb0003.randomcoapp.app.di.PresenterFactory
 import com.jmlb0003.randomcoapp.domain.model.User
 import com.jmlb0003.randomcoapp.presentation.BaseActivity
+import com.jmlb0003.randomcoapp.presentation.details.DetailsActivity
 
 class MainActivity : BaseActivity<MainActivityPresenter.MainActivityView, MainActivityPresenter>(),
                      MainActivityPresenter.MainActivityView,
@@ -31,8 +33,8 @@ class MainActivity : BaseActivity<MainActivityPresenter.MainActivityView, MainAc
     }
 
     override fun showUserDetails(user: User) {
-        //TODO
-        Toast.makeText(this, "Showing user details for: ${user.name}", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, DetailsActivity::class.java)
+        startActivity(intent.putExtras(DetailsActivity.newBundle(user)))
     }
 
     override fun showError(errorMessage: String) {
