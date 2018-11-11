@@ -5,7 +5,9 @@ import com.jmlb0003.randomcoapp.domain.repository.UsersRepository
 
 object RepositoryFactory {
 
-    private val usersRepositoryInstance: UsersRepository by lazy { UsersRepositoryImp() }
+    private val usersRepositoryInstance: UsersRepository by lazy {
+        UsersRepositoryImp(NetworkFactory.createRandomUserService(), NetworkFactory.createUserParser())
+    }
 
     fun createUsersRepository(): UsersRepository = usersRepositoryInstance
 
