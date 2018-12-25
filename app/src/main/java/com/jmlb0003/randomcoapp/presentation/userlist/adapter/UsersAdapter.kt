@@ -35,7 +35,7 @@ class UsersAdapter(private val listener: OnUserClickListener) :
         }
     }
 
-    fun setFavorite(user: User, isFavorite: Boolean) {
+    fun setFavorite(user: User) {
         // The flag has been changed in the presenter
         val position = usersToShow.indexOf(user)
         notifyItemChanged(position)

@@ -17,7 +17,7 @@ abstract class BaseActivity<V : BasePresenter.BaseView, P : BasePresenter<V>> : 
 
     override fun onPause() {
         super.onPause()
-        getPresenter().attachView(getMVPViewReference())
+        getPresenter().detachView()
     }
 
 }

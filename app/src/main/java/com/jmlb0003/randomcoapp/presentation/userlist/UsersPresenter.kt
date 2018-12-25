@@ -120,11 +120,11 @@ class UsersPresenter(private val repository: UsersRepository,
     }
 
     fun onShowOnlyFavoriteUsers() {
-        getView()?.showUsers(users.filter { user -> user.isFavorite })
+        getView()?.showUsers(sorter.sortByName(users.filter { user -> user.isFavorite }))
     }
 
     fun onShowUsersWithoutFilter() {
-        getView()?.showUsers(users)
+        getView()?.showUsers(sorter.sortByName(users))
     }
 
     interface UsersView : BasePresenter.BaseView {

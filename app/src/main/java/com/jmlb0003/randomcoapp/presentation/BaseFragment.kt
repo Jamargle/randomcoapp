@@ -51,7 +51,9 @@ abstract class BaseFragment<C, V : BasePresenter.BaseView, P : BasePresenter<V>>
 
     override fun onStart() {
         super.onStart()
-        getPresenter().attachView(getMVPViewReference())
+        if (getPresenter().getView() == null) {
+            getPresenter().attachView(getMVPViewReference())
+        }
     }
 
     override fun onPause() {
