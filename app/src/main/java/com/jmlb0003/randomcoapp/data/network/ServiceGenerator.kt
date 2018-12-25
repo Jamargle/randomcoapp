@@ -1,4 +1,4 @@
-package com.jmlb0003.randomcoapp.app
+package com.jmlb0003.randomcoapp.data.network
 
 import com.jmlb0003.randomcoapp.BuildConfig
 import okhttp3.OkHttpClient

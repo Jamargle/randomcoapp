@@ -1,7 +1,7 @@
 package com.jmlb0003.randomcoapp.data.repository
 
 import com.jmlb0003.randomcoapp.data.RepeatedUsersChecker
-import com.jmlb0003.randomcoapp.data.UserApiClient
+import com.jmlb0003.randomcoapp.data.network.UserApiClient
 import com.jmlb0003.randomcoapp.data.network.UserParser
 import com.jmlb0003.randomcoapp.data.network.servicemodel.UsersApiResponse
 import com.jmlb0003.randomcoapp.domain.model.User

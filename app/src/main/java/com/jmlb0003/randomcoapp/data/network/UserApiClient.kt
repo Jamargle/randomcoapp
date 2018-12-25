@@ -1,4 +1,4 @@
-package com.jmlb0003.randomcoapp.data
+package com.jmlb0003.randomcoapp.data.network
 
 import com.jmlb0003.randomcoapp.data.network.servicemodel.UsersApiResponse
 import retrofit2.Call
